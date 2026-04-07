@@ -10,6 +10,10 @@
 
 let config = {
 	type: Phaser.WEBGL,
+
+	width: 640,
+	height: 480,
+
 	scene: [ Dispatch, Load, InnerGame, OuterGame, ],
 };
 
