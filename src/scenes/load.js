@@ -4,8 +4,13 @@ class Load extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image("button_delete", "assets/ui/button_delete.png");
-		this.load.image("button_respond", "assets/ui/button_respond.png");
+		this.load.once("complete", () => { this.scene.start("desktop_scene"); });
+
+		this.load.bitmapFont(
+			"roboto_font",
+			"./assets/fonts/roboto/roboto.png",
+			"./assets/fonts/roboto/roboto.xml"
+		);
 	}
 }
 
