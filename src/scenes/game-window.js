@@ -1,6 +1,6 @@
-class InnerGame extends Phaser.Scene {
+class GameWindow extends Phaser.Scene {
 	constructor() {
-		super("inner-game_scene");
+		super("game-window_scene");
 	}
 	preload() {
 		this.load.path = 'assets/sounds/'
@@ -32,8 +32,10 @@ class InnerGame extends Phaser.Scene {
 	}
 
 	// test use case for function passed into makeTextbox
-	fart(button) {
+	moveToNextRoom(button) {
 		button.setStyle({ backgroundColor: '#FFF' })
+		this.currRoom = 'r2'
+		this.roomText.setText(`ROOM: ${this.currRoom}`)
 	}
 
 	create() {
@@ -62,9 +64,13 @@ class InnerGame extends Phaser.Scene {
 
 		this.add.sprite(0,0, 'tv')
 
-		this.makeTextbox(100,100,"hello i am under the water please help me", this.fart)
-		this.makeTextbox(100,125,"aaaaaaaaaaaaaaa", this.fart)
-		this.makeTextbox(100,150,"pee pee poo poo", this.fart)
+		this.cameras.main.setSize(300, 200);
+
+		this.roomText = this.add.text(25,25,`ROOM: ${this.currRoom}`)
+
+		this.makeTextbox(100,100,"move to next room", this.moveToNextRoom.bind(this))
+		this.makeTextbox(100,125,"fight enemy", this.moveToNextRoom.bind(this))
+		this.makeTextbox(100,150,"run to previous room", this.moveToNextRoom.bind(this))
 	}
 }
 
