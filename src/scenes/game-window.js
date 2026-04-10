@@ -3,6 +3,7 @@ class GameWindow extends Phaser.Scene {
 		super("game-window_scene");
 	}
 	preload() {
+		// load paths for less typing also for organization lowkey
 		this.load.path = 'assets/sounds/'
 		this.load.audio('textbox_hover', 'textbox_hover.mp3')
 		this.load.audio('textbox_click', 'textbox_click.mp3')
@@ -29,10 +30,32 @@ class GameWindow extends Phaser.Scene {
 				this.sound.play('textbox_hover', this.buttonAudioConfig);
 			})
 			.on('pointerout', () => button.setStyle({ backgroundColor: '#111' }));
+		this.textOptions.add(button)
+	}
+
+	// load textbox options from room
+	loadOptions(room) {
+		let x = 100
+		let y = 100
+		if (room.type === Room.COMBAT_TYPE) {
+			this.makeTextbox(x,y,"attack enemy", this.attackEnemyOption.bind(this))
+			y += 25
+		}
+		this.makeTextbox(x,y,"Go to Map", this.goToMap.bind(this))
+		y += 25;
+
+		for (let option in room.options) {
+			this.makeTextbox(x,y,option.text, option.func)
+			y += 25;
+		}
+	}
+
+	attackEnemyOption(button) {
+
 	}
 
 	// test use case for function passed into makeTextbox
-	moveToNextRoom(button) {
+	goToMap(button) {
 		button.setStyle({ backgroundColor: '#FFF' })
 		this.currRoom = 'r2'
 		this.roomText.setText(`ROOM: ${this.currRoom}`)
@@ -45,6 +68,7 @@ class GameWindow extends Phaser.Scene {
 
 		this.currMap = "map1"
 		this.currRoom = "r1"
+		this.textOptions = []
 
 		this.scoreConfig = {
 			fontFamily: 'Arial',
@@ -68,9 +92,8 @@ class GameWindow extends Phaser.Scene {
 
 		this.roomText = this.add.text(25,25,`ROOM: ${this.currRoom}`)
 
-		this.makeTextbox(100,100,"move to next room", this.moveToNextRoom.bind(this))
-		this.makeTextbox(100,125,"fight enemy", this.moveToNextRoom.bind(this))
-		this.makeTextbox(100,150,"run to previous room", this.moveToNextRoom.bind(this))
+		// .bind(this) is CRUCIAL for nested function calls, otherwise context will be the button instead of game_window
+		this.loadOptions(Room.maps.map1.rooms.r1)
 	}
 }
 
