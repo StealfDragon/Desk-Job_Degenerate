@@ -1,7 +1,3 @@
-// constants
-const EMAIL_MARGIN = 5.0;
-const EMAIL_PADDING = 2.5;
-
 class Email extends Phaser.GameObjects.Container {
 	constructor(scene) {
 		super(scene, 0.0, 0.0);
@@ -11,6 +7,7 @@ class Email extends Phaser.GameObjects.Container {
 
 		this.subject = email_contents.subject;
 		this.message = email_contents.message;
+		this.category = email_contents.category;
 
 		this.subject_text = new Phaser.GameObjects.BitmapText(
 			scene,
@@ -42,8 +39,12 @@ class Email extends Phaser.GameObjects.Container {
 		});
 
 		this.on("dragend", () => {
-			if(this.x < -75.0 || 75.0 < this.x ) {
-				console.log("edge");
+			if(this.x < -75.0) {
+				this.emit(this.category == "trash" ? "sort-correct" : "sort-incorrect");
+			}
+
+			if(75.0 < this.x) {
+				this.emit(this.category == "archive" ? "sort-correct" : "sort-incorrect");
 			}
 
 			this.setPosition(0.0, 0.0);

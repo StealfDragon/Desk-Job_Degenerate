@@ -1,6 +1,8 @@
 class CurrencyInterface extends Phaser.GameObjects.GameObject {
 	constructor(scene) {
 		super(scene);
+
+		scene.add.existing(this);
 	}
 
 	create() {
@@ -9,6 +11,7 @@ class CurrencyInterface extends Phaser.GameObjects.GameObject {
 
 	money_earn(amount) {
 		this.account_balance += amount;
+		console.log(`money earned: ${amount}`);
 	}
 
 	money_spend(amount, expense) {

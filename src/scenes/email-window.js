@@ -11,6 +11,16 @@ class EmailWindow extends Phaser.Scene {
 		this.emails = [
 			new Email(this),
 		];
+
+		for(let email of this.emails) {
+			email.on("sort-correct", () => {
+				this.events.emit("sort-correct");
+			});
+
+			email.on("sort-incorrect", () => {
+				this.events.emit("sort-incorrect");
+			});
+		}
 	}
 }
 
