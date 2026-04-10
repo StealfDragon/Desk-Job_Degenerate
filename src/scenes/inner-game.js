@@ -2,18 +2,13 @@ class InnerGame extends Phaser.Scene {
 	constructor() {
 		super("inner-game_scene");
 	}
-
-<<<<<<< Updated upstream
 	preload() {
     this.load.image('inventory', 'assets/images/inventory.png');
     this.load.image('pausemenu', 'assets/images/Play-Options-Exit.png)');
     this.load.image('levelborder', 'assets/images/Level Border.png');
     this.load.spritesheet('rogueplayer', 'assets/images/doc.png', { frameWidth: 16, frameHeight: 16 });
     
-	  }
-
-	create() {}
-=======
+	}
 	make_textbox(x, y, text) {
 		let button = this.add.text(x, y, text, this.scoreConfig)
 			.setStyle({ backgroundColor: '#111' })
@@ -50,6 +45,5 @@ class InnerGame extends Phaser.Scene {
 		this.make_textbox(100,125,"aaaaaaaaaaaaaaa")
 		this.make_textbox(100,150,"pee pee poo poo")
 	}
->>>>>>> Stashed changes
 }
 
