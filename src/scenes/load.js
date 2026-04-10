@@ -16,7 +16,7 @@ class Load extends Phaser.Scene {
 		this.load.image("level-border_image", "level-border.png");
 		this.load.image("tv_image", "tv.png");
 
-		this.load.spritesheet("rogueplayer", "doc.png", { frameWidth: 16, frameHeight: 16, });
+		this.load.spritesheet("player_spritesheet", "player.png", { frameWidth: 16, frameHeight: 16, });
 
 		this.load.path = "./assets/fonts/"
 		this.load.bitmapFont(
