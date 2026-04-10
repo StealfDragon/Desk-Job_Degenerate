@@ -2,7 +2,7 @@ class GameWindow extends Phaser.Scene {
 	constructor() {
 		super("game-window_scene");
 	}
-	
+
 	preload() {
 		// load paths for less typing also for organization lowkey
 		this.load.path = 'assets/sounds/'
