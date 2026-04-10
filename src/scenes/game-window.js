@@ -3,21 +3,6 @@ class GameWindow extends Phaser.Scene {
 		super("game-window_scene");
 	}
 
-	preload() {
-		// load paths for less typing also for organization lowkey
-		this.load.path = 'assets/sounds/'
-		this.load.audio('textbox_hover', 'textbox_hover.mp3')
-		this.load.audio('textbox_click', 'textbox_click.mp3')
-
-		this.load.path = 'assets/images/'
-		this.load.image('inventory', 'inventory.png');
-		this.load.image('pausemenu', 'Play-Options-Exit.png)');
-		this.load.image('levelborder', 'Level Border.png');
-		this.load.image('tv', 'outergametv.png');
-		this.load.spritesheet('rogueplayer', 'doc.png', { frameWidth: 16, frameHeight: 16 });
-
-	}
-
 	makeTextbox(x, y, text, func) {
 		let button = this.add.text(x, y, text, this.scoreConfig)
 			.setStyle({ backgroundColor: '#111' })
@@ -31,7 +16,7 @@ class GameWindow extends Phaser.Scene {
 				this.sound.play('textbox-hover_sound', this.buttonAudioConfig);
 			})
 			.on('pointerout', () => button.setStyle({ backgroundColor: '#111' }));
-		this.textOptions.add(button)
+		this.textOptions.push(button)
 	}
 
 	// load textbox options from room
