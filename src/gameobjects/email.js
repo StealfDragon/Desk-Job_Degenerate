@@ -57,7 +57,7 @@ class Email extends Phaser.GameObjects.Container {
 		return {
 			subject: "test subject line",
 			message: "this is a test email.",
-			category: "trash", // TODO - factor into Category class (though that might be overkill...)
+			category: "trash",
 		};
 	}
 }
