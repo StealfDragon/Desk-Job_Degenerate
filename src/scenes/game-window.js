@@ -2,6 +2,7 @@ class GameWindow extends Phaser.Scene {
 	constructor() {
 		super("game-window_scene");
 	}
+	
 	preload() {
 		// load paths for less typing also for organization lowkey
 		this.load.path = 'assets/sounds/'
@@ -23,11 +24,11 @@ class GameWindow extends Phaser.Scene {
 			.setInteractive({ useHandCursor: true })
 			.on('pointerdown', () => {
 				func(button);
-				this.sound.play('textbox_click', this.buttonAudioConfig);
+				this.sound.play('textbox-click_sound', this.buttonAudioConfig);
 			})
 			.on('pointerover', () => {
 				button.setStyle({ backgroundColor: '#f39c12' });
-				this.sound.play('textbox_hover', this.buttonAudioConfig);
+				this.sound.play('textbox-hover_sound', this.buttonAudioConfig);
 			})
 			.on('pointerout', () => button.setStyle({ backgroundColor: '#111' }));
 		this.textOptions.add(button)
@@ -86,7 +87,7 @@ class GameWindow extends Phaser.Scene {
 			loop: false
 		}
 
-		this.add.sprite(0,0, 'tv')
+		this.add.sprite(0,0, 'tv_image')
 
 		this.cameras.main.setSize(300, 200);
 
