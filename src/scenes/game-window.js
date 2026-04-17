@@ -76,6 +76,7 @@ class GameWindow extends Phaser.Scene {
 	}
 
 	create() {
+		this.bank_scene  = this.scene.get("bank-window_scene");
 		KEY_UP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 		KEY_DOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 		KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -133,6 +134,20 @@ class GameWindow extends Phaser.Scene {
 	buyMicrotransaction(button) {
 		button.setStyle({ backgroundColor: '#FFF' });
 		console.log("Microtransaction purchase clicked.");
+		console.log(CURRENCY_INTERFACE.account_balance)
+
+		if (CURRENCY_INTERFACE.account_balance >= 5) {
+			CURRENCY_INTERFACE.money_spend(5)
+
+			this.bank_scene.balance_text_update(CURRENCY_INTERFACE.account_balance)
+
+			this.scene.start("dungeon-map_scene", {
+				currMap: this.currMap,
+				roomId: this.roomId,
+				spawnName: this.returnSpawn
+
+			})
+		}
 	}
 
 	returnToMap(button) {

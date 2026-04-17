@@ -5,6 +5,7 @@ class Desktop extends Phaser.Scene {
 
     create() {
         this.currency_interface = new CurrencyInterface(this);
+        CURRENCY_INTERFACE = this.currency_interface
         this.scene.launch("email-window_scene");
         this.scene.launch("game-window_scene");
         this.scene.launch("bank-window_scene", this.currency_interface.account_balance);
