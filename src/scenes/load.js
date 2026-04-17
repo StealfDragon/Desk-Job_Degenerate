@@ -26,7 +26,7 @@ class Load extends Phaser.Scene {
 		this.load.image("pumpkin_dude_idle", "pumpkin_dude_idle_anim_f1.png");
 
 		this.load.path = "./assets/maps/";
-		this.load.tilemapTiledJSON("map1", "Split 1 Map 1.tmj");
+		this.load.tilemapTiledJSON("map1", "Split1Map1.tmj");
 
 		this.load.path = "./assets/fonts/"
 		this.load.bitmapFont(
