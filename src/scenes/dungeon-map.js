@@ -49,7 +49,6 @@ class DungeonMap extends Phaser.Scene {
 
 		this.player.setCollideWorldBounds(true);
 
-		// Optional: smaller hitbox feels better than full sprite box
 		this.player.body.setSize(10, 12);
 		this.player.body.setOffset(3, 4);
 
@@ -176,7 +175,6 @@ class DungeonMap extends Phaser.Scene {
 
 		const data = zone.triggerData || {};
 
-		// Example trigger types: room, enemy, exit
 		if (zone.triggerType === "room") {
 			this.scene.start("game-window_scene", {
 				mapKey: this.currMap,
