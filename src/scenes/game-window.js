@@ -71,6 +71,8 @@ class GameWindow extends Phaser.Scene {
 	startGame(button) {
 		button.visible = false;
 		this.startText.visible = false;
+
+		this.loadOptions(Room.maps.map1.rooms.r1)
 	}
 
 	create() {
