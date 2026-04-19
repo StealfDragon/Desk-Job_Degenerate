@@ -112,8 +112,6 @@ class GameWindow extends Phaser.Scene {
 			loop: false
 		}
 
-		this.add.sprite(0,0, 'tv_image')
-
 		this.cameras.main.setSize(620.0, 560.0);
 		this.cameras.main.setPosition(20.0, 20.0);
 

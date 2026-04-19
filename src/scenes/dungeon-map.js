@@ -22,10 +22,8 @@ class DungeonMap extends Phaser.Scene {
 	createMap() {
 		this.map = this.make.tilemap({ key: this.currMap });
 
-		this.cameras.main.setSize(620.0, 560.0);
+		this.cameras.main.setSize(560.0, 480.0);
 		this.cameras.main.setPosition(20.0, 20.0);
-
-		this.add.sprite(0, 0, "tv_image").setOrigin(0, 0);
 
 		this.tileset = this.map.addTilesetImage("atlas_walls_high-16x32", "dungeon_walls_tiles");
 		this.wallLayer = this.map.createLayer("Tile Layer 1", this.tileset, 0, 0);
@@ -74,7 +72,6 @@ class DungeonMap extends Phaser.Scene {
 	}
 
 	createAnimations() {
-		// Only create once
 		if (this.anims.exists("walk-down")) return;
 
 		this.anims.create({
@@ -254,7 +251,6 @@ class DungeonMap extends Phaser.Scene {
 
 		this.player.setVelocity(vx, vy);
 
-		// Prevent diagonal movement being faster
 		this.player.body.velocity.normalize().scale(speed);
 
 		if (vx < 0) {
