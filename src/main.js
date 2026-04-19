@@ -22,11 +22,9 @@ let config = {
 		}
 	},
 
-	scene: [ Load, Desktop, BankWindow, EmailWindow, GameWindow, DungeonMap],
+	scene: [Load, Desktop, BankWindow, EmailWindow, GameWindow, DungeonMap],
 };
 
 let game = new Phaser.Game(config);
-
 let CURRENCY_INTERFACE = null
-
 let KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_MENU;

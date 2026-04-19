@@ -22,8 +22,8 @@ class DungeonMap extends Phaser.Scene {
 	createMap() {
 		this.map = this.make.tilemap({ key: this.currMap });
 
-		this.cameras.main.setSize(560.0, 480.0);
-		this.cameras.main.setPosition(20.0, 20.0);
+		this.cameras.main.setSize(560.0, 460.0);
+		this.cameras.main.setPosition(33.0, 45.0);
 
 		this.tileset = this.map.addTilesetImage("atlas_walls_high-16x32", "dungeon_walls_tiles");
 		this.wallLayer = this.map.createLayer("Tile Layer 1", this.tileset, 0, 0);
@@ -33,8 +33,10 @@ class DungeonMap extends Phaser.Scene {
 		}
 
 		this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-	}
 
+		this.cameras.main.setBackgroundColor(0x2b2b2b);
+	}
+	
 	createPlayer() {
 		const spawn = this.findSpawnPoint(this.spawnName);
 

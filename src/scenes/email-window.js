@@ -21,7 +21,7 @@ class EmailWindow extends Phaser.Scene {
         });
 
         this.add.text(270.0, 4.0, "—", { fontFamily: 'Arial', fontSize: '12px', color: '#ffffff' });
-        this.add.text(295.0, 4.0, "□", { fontFamily: 'Arial', fontSize: '12px', color: '#ffffff' });
+        this.add.text(295.0, 3.0, "□", { fontFamily: 'Arial', fontSize: '12px', color: '#ffffff' });
         this.add.text(318.0, 4.0, "✕", { fontFamily: 'Arial', fontSize: '12px', color: '#ffffff' });
 
         this.loadingText = this.add.text(12.0, 110.0, "Generating email...", {fontFamily: 'Arial', fontSize: '10px', color: '#aaaaaa',});

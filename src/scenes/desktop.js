@@ -13,8 +13,8 @@ class Desktop extends Phaser.Scene {
         this.add.sprite(-500, -140, 'tv_image').setOrigin(0, 0).setDisplaySize(2000.0, 800.0).setDepth(-1);
 
         this.email_scene = this.scene.get("email-window_scene");
-        this.game_scene  = this.scene.get("game-window_scene");
-        this.bank_scene  = this.scene.get("bank-window_scene");
+        this.game_scene = this.scene.get("game-window_scene");
+        this.bank_scene = this.scene.get("bank-window_scene");
 
         this.scene.get("email-window_scene").events.on("sort-correct", () => {this.bank_scene.balance_text_update(this.currency_interface.money_earn(5.0));});
 
