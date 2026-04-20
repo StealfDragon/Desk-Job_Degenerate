@@ -16,6 +16,7 @@ class GameWindow extends Phaser.Scene {
 		this.fromMap = data.fromMap || false;
 		this.triggerName = data.triggerName || null;
 		this.triggerType = data.triggerType || null;
+		this.firstRoom = true;
 	}
 
 	makeTextbox(x, y, text, func) {
@@ -43,8 +44,22 @@ class GameWindow extends Phaser.Scene {
 			this.makeTextbox(x, y, "attack enemy", this.attackEnemyOption.bind(this));
 			y += 25;
 		}
-		this.makeTextbox(x, y, "Go to Map", this.goToMap.bind(this));
-		y += 25;
+		if (!this.firstRoom) {
+			this.makeTextbox(x, y, "Go to Map", this.goToMap.bind(this));
+			y += 25;
+		}
+		else {
+			this.firstRoom = false;
+			this.scene.start("dungeon-map_scene", {
+				mapKey: this.currMap,
+				spawnName: this.returnSpawn,
+				playerState: this.playerState,
+				enemyStates: this.enemyStates,
+				defeatedEnemies: this.defeatedEnemies,
+				purchasedMicrotransactions: this.purchasedMicrotransactions,
+			});
+			return;
+		}
 
 		for (let option in room.options) {
 			this.makeTextbox(x, y, option.text, option.func);
