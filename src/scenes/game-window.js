@@ -8,6 +8,10 @@ class GameWindow extends Phaser.Scene {
 		this.currRoom = data.roomId || "r1";
 		this.returnSpawn = data.returnSpawn || "spawn_r1";
 		this.enemyId = data.enemyId || null;
+		this.playerState = data.playerState || null;
+		this.enemyStates = data.enemyStates || {};
+		this.defeatedEnemies = data.defeatedEnemies || [];
+		this.purchasedMicrotransactions = data.purchasedMicrotransactions || [];
 
 		this.fromMap = data.fromMap || false;
 		this.triggerName = data.triggerName || null;
@@ -50,14 +54,44 @@ class GameWindow extends Phaser.Scene {
 
 	attackEnemyOption(button) {
 		button.setStyle({ backgroundColor: '#FFF' });
-		console.log(`Enemy ${this.enemyId || "unknown"} attacked.`);
+		if (CURRENCY_INTERFACE.account_balance < 5) {
+			if (this.statusText) {
+				this.statusText.setText("Not enough money to attack. Need $5.");
+			}
+			return;
+		}
+
+		CURRENCY_INTERFACE.money_spend(5, "attack enemy");
+		this.bank_scene.balance_text_update(CURRENCY_INTERFACE.account_balance);
+
+		const defeatedEnemies = [...this.defeatedEnemies];
+		if (this.enemyId && !defeatedEnemies.includes(this.enemyId)) {
+			defeatedEnemies.push(this.enemyId);
+		}
+
+		if (this.statusText) {
+			this.statusText.setText(`Attacked ${this.enemyId || "enemy"} for $5.`);
+		}
+
+		this.scene.start("dungeon-map_scene", {
+			mapKey: this.currMap,
+			spawnName: this.returnSpawn,
+			playerState: this.playerState,
+			enemyStates: this.enemyStates,
+			defeatedEnemies,
+			purchasedMicrotransactions: this.purchasedMicrotransactions,
+		});
 	}
 
 	goToMap(button) {
 		button.setStyle({ backgroundColor: '#FFF' });
 		this.scene.start("dungeon-map_scene", {
 			mapKey: this.currMap,
-			spawnName: this.returnSpawn
+			spawnName: this.returnSpawn,
+			playerState: this.playerState,
+			enemyStates: this.enemyStates,
+			defeatedEnemies: this.defeatedEnemies,
+			purchasedMicrotransactions: this.purchasedMicrotransactions,
 		});
 	}
 
@@ -113,6 +147,7 @@ class GameWindow extends Phaser.Scene {
 		}
 
 		this.startText = this.add.text(50, 80, "Dungeon Game 3", this.startConfig);
+		this.statusText = this.add.text(50, 110, "", this.scoreConfig);
 
 		if (!this.triggerType) {
 			this.makeTextbox(50, 140, "PLAY", this.startGame.bind(this));
@@ -128,11 +163,21 @@ class GameWindow extends Phaser.Scene {
 		if (CURRENCY_INTERFACE.account_balance >= 5) {
 			CURRENCY_INTERFACE.money_spend(5);
 			this.bank_scene.balance_text_update(CURRENCY_INTERFACE.account_balance);
+			const purchasedMicrotransactions = [...this.purchasedMicrotransactions];
+			if (this.triggerName && !purchasedMicrotransactions.includes(this.triggerName)) {
+				purchasedMicrotransactions.push(this.triggerName);
+			}
 			this.scene.start("dungeon-map_scene", {
-				currMap: this.currMap,
-				roomId: this.roomId,
-				spawnName: this.returnSpawn
+				mapKey: this.currMap,
+				roomId: this.currRoom,
+				spawnName: this.returnSpawn,
+				playerState: this.playerState,
+				enemyStates: this.enemyStates,
+				defeatedEnemies: this.defeatedEnemies,
+				purchasedMicrotransactions,
 			});
+		} else if (this.statusText) {
+			this.statusText.setText("Not enough money. Need $5.");
 		}
 	}
 
@@ -140,7 +185,11 @@ class GameWindow extends Phaser.Scene {
 		button.setStyle({ backgroundColor: '#FFF' });
 		this.scene.start("dungeon-map_scene", {
 			mapKey: this.currMap,
-			spawnName: this.returnSpawn
+			spawnName: this.returnSpawn,
+			playerState: this.playerState,
+			enemyStates: this.enemyStates,
+			defeatedEnemies: this.defeatedEnemies,
+			purchasedMicrotransactions: this.purchasedMicrotransactions,
 		});
 	}
 }

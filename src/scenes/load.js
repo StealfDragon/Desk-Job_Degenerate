@@ -21,6 +21,7 @@ class Load extends Phaser.Scene {
 
 		this.load.path = "./assets/0x72_DungeonTilesetII_v1.7/";
 		this.load.image("dungeon_walls_tiles", "atlas_walls_high-16x32.png");
+		this.load.image("roguelike_background_tiles", "atlas_floor-16x16.png");
 
 		this.load.path = "./assets/0x72_DungeonTilesetII_v1.7/frames/";
 		this.load.image("pumpkin_dude_idle", "pumpkin_dude_idle_anim_f1.png");
